@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requirements", "Requirement
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.Domain", "Core\MovieApi.Domain\MovieApi.Domain.csproj", "{76E26403-E0BA-498E-9E88-826BDACD9472}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.Persistence", "Infrastructure\MovieApi.Persistence\MovieApi.Persistence.csproj", "{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.WebApi", "Presentation\MovieApi.WebApi\MovieApi.WebApi.csproj", "{5EF0B655-192E-4D58-91D6-514D5945B13F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.Application", "Core\MovieApi.Application\MovieApi.Application.csproj", "{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +31,27 @@ Global
 		{76E26403-E0BA-498E-9E88-826BDACD9472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76E26403-E0BA-498E-9E88-826BDACD9472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76E26403-E0BA-498E-9E88-826BDACD9472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF0B655-192E-4D58-91D6-514D5945B13F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF0B655-192E-4D58-91D6-514D5945B13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF0B655-192E-4D58-91D6-514D5945B13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF0B655-192E-4D58-91D6-514D5945B13F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{76E26403-E0BA-498E-9E88-826BDACD9472} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{59487BD2-C0F8-4DA8-9AD2-7E86C6D556C1} = {9529A863-1309-4C89-8C30-A79B68251D63}
+		{5EF0B655-192E-4D58-91D6-514D5945B13F} = {FF4CAE0F-6B91-475D-86D9-4F2F84366332}
+		{FE20A2AE-1AF9-4B0E-A3DD-93898362EE00} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {096BCD1D-6463-4309-8E3A-587628EC379E}

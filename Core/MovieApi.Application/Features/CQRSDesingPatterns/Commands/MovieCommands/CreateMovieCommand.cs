@@ -1,8 +1,7 @@
-﻿namespace MovieApi.Domain.Entities;
+﻿namespace MovieApi.Application.Features.CQRSDesingPatterns.Commands.MovieCommands;
 
-public class Movie
+public class CreateMovieCommand
 {
-    public int MovieId { get; set; }
     public string Title { get; set; }
     public string CoverImageUrl { get; set; }
     public decimal Rating { get; set; }
@@ -11,5 +10,4 @@ public class Movie
     public DateTime ReleaseDate { get; set; }
     public string CreatedYear { get; set; }
     public bool Status { get; set; }
-
 }
