@@ -32,4 +32,16 @@ public class MovieController : Controller
 
         return View();
     }
+
+    public async Task<IActionResult> MovieDetail(int id)
+    {
+        //var client = _httpClientFactory.CreateClient();
+        //var responseMessage = await client.GetAsync($"https://localhost:7031/api/Movies/{id}");
+        //if (responseMessage.IsSuccessStatusCode)
+        //{
+        //    ResultMovieDto? values = await responseMessage.Content.ReadFromJsonAsync<ResultMovieDto>();
+        //    return View(values);
+        //}
+        return View();
+    }
 }
