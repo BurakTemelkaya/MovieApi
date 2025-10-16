@@ -21,7 +21,7 @@ public class CreateUserRegisterCommandHandler
         AppUser user = new()
         {
             FirstName = command.FirstName,
-            LastName = command.Surname,
+            LastName = command.LastName,
             UserName = command.UserName,
             Email = command.Email
         };

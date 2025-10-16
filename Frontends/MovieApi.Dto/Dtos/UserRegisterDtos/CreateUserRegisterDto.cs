@@ -1,6 +1,6 @@
-﻿namespace MovieApi.Application.Features.CQRSDesingPatterns.Commands.UserRegisterCommands;
+﻿namespace MovieApi.Dto.Dtos.UserRegisterDtos;
 
-public class CreateUserRegisterCommand
+public class CreateUserRegisterDto
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
