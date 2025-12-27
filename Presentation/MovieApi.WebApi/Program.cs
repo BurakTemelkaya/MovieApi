@@ -8,7 +8,6 @@ using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.UserRegisterHand
 using MovieApi.Application.Features.MediatorDesignPatterns.Handlers.TagHandlers;
 using MovieApi.Persistence.Context;
 using MovieApi.Persistence.Identity;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
