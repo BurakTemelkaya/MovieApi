@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieApi.Dto.Dtos.AdminMovieDtos;
-using MovieApi.Dto.Dtos.MovieDtos;
 
 namespace MovieApi.WebUI.Areas.Admin.Controllers;
 

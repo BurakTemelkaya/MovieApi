@@ -1,142 +1,221 @@
-﻿
+﻿@model List<AdminResultMovieDto>
 @{
-    ViewData["Title"] = "MovieList";
-    Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
+    ViewData["Title"] = "Film Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-@model List<MovieApi.Dto.Dtos.MovieDtos.ResultMovieDto>
+<style>
+    :root {
+        --primary: #6366f1;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --bg-soft: #f8fafc;
+        --text-dark: #1f2937;
+        --text-muted: #6b7280;
+        --radius: 12px;
+    }
 
+    .admin-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.04);
+    }
 
-<div class="page-single movie_list">
-    <div class="container">
-        <div class="row ipad-width2">
-            <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="topbar-filter">
-                    <p>Toplam <span>184 film</span> mevcut</p>
-                    <label>Sıralama:</label>
-                    <select>
-                        <option value="popularity">Popüler sıralama A--Z</option>
-                        <option value="popularity">Popüler sıralama Z--A</option>
-                        <option value="rating">Reytinge Göre A--Z</option>
-                        <option value="rating">Reytinge Göre Z--A</option>
-                        <option value="date">Eklenme Sırasına Göre A--Z</option>
-                        <option value="date">Eklenme Sırasına Göre Z--A</option>
-                    </select>
-                    <a href="movielist.html" class="list"><i class="ion-ios-list-outline active"></i></a>
-                    <a href="moviegrid.html" class="grid"><i class="ion-grid"></i></a>
-                </div>
-                @foreach (MovieApi.Dto.Dtos.MovieDtos.ResultMovieDto movie in Model)
-                {
-                    <div class="movie-item-style-2">
-                        <img src="@movie.CoverImageUrl" alt="@movie.Title image">
-                        <div class="mv-item-infor">
-                            <h6><a href="moviesingle.html">@movie.Title <span>(@movie.CreatedYear)</span></a></h6>
-                            <p class="rate"><i class="ion-android-star"></i><span>@movie.Rating</span> /10</p>
-                            <p class="describe">@movie.Description</p>
-                            <p class="run-time"> Run Time: @movie.Duration’    .     <span>MMPA: PG-13 </span>    .     <span>Çıkış Tarihi: @movie.ReleaseDate</span></p>
-                            <p>Director: <a href="#">Daha Sonra Yapılacak</a></p>
-                            <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
-                        </div>
-                    </div>
-                }
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
 
-                <div class="topbar-filter">
-                    <label>Her Sayfadaki Film Sayfası:</label>
-                    <select>
-                        <option value="range">5 Film</option>
-                        <option value="saab">10 Film</option>
-                    </select>
-                    <div class="pagination2">
-                        <span>Sayfa 1 - 2:</span>
-                        <a class="active" href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#"><i class="ion-arrow-right-b"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="sidebar">
-                    <div class="searh-form">
-                        <h4 class="sb-title">Film Ara</h4>
-                        <form class="form-style-1" action="#">
-                            <div class="row">
-                                <div class="col-md-12 form-it">
-                                    <label>Film İsmi</label>
-                                    <input type="text" placeholder="Aranacak Kelimeleri Giriniz">
-                                </div>
-                                <div class="col-md-12 form-it">
-                                    <label>Tür & Kategori</label>
-                                    <div class="group-ip">
-                                        <select name="skills" multiple="" class="ui fluid dropdown">
-                                            <option value="">Film Türü Seçiniz</option>
-                                            <option value="Action1">Aksiyon</option>
-                                            <option value="Action2">Macera</option>
-                                            <option value="Action3">Animasyon</option>
-                                            <option value="Action4">Korku</option>
-                                            <option value="Action5">Komedi</option>
-                                        </select>
-                                    </div>
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-                                </div>
-                                <div class="col-md-12 form-it">
-                                    <label>Reyting Puanı</label>
+    .admin-search {
+        position: relative;
+        max-width: 320px;
+        width: 100%;
+    }
 
-                                    <select>
-                                        <option value="range">-- Reyting Puanı Seçin --</option>
-                                        <option value="saab">-- 8 ve üzeri --</option>
-                                        <option value="saab">-- 7 ve 8 Arası --</option>
-                                        <option value="saab">-- 5 ve 7 Arası --</option>
-                                        <option value="saab">-- 5'den düşük --</option>
-                                    </select>
+        .admin-search input {
+            width: 100%;
+            padding: 10px 14px 10px 40px;
+            border-radius: var(--radius);
+            border: 1px solid #e5e7eb;
+            background: var(--bg-soft);
+        }
 
-                                </div>
-                                <div class="col-md-12 form-it">
-                                    <label>Film Çıkış Tarihi</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <select>
-                                                <option value="range">Yıl Seçiniz</option>
-                                                <option value="2000">2000</option>
-                                                <option value="2010">2010</option>
-                                                <option value="2020">2020</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select>
-                                                <option value="range">Yıl Seçiniz</option>
-                                                <option value="2000">2000</option>
-                                                <option value="2010">2010</option>
-                                                <option value="2020">2020</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 ">
-                                    <input class="submit" type="submit" value="Film Ara">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="ads">
-                        <img src="~/Film-Review-Movie-Database/images/uploads/ads1.png" alt="">
-                    </div>
-                    <div class="sb-facebook sb-it">
-                        <h4 class="sb-title">Find us on Facebook</h4>
-                        <iframe src="#" data-src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftemplatespoint.net%2F%3Ffref%3Dts&tabs=timeline&width=340&height=315px&small_header=true&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" height="315" style="width:100%;border:none;overflow:hidden"></iframe>
-                    </div>
-                    <div class="sb-twitter sb-it">
-                        <h4 class="sb-title">Tweet to us</h4>
-                        <div class="slick-tw">
-                            <div class="tweet item" id="">
-                                <!-- Put your twiter id here -->
-                            </div>
-                            <div class="tweet item" id="">
-                                <!-- Put your 2nd twiter account id here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        .admin-search ion-icon {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+    .btn-primary-soft {
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+    }
+
+    .movie-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+
+        .movie-table thead th {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 12px;
+        }
+
+        .movie-table tbody tr {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 10px rgba(0,0,0,.03);
+        }
+
+        .movie-table tbody td {
+            padding: 14px 12px;
+            vertical-align: middle;
+            color: var(--text-dark);
+        }
+
+    .movie-id {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    .rating-pill {
+        background: #fef3c7;
+        color: #92400e;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 13px;
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .status-pill {
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+        .status-pill.active {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .status-pill.passive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+    .action-btn {
+        padding: 8px 14px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        font-size: 13px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .btn-delete { background: var(--danger); }
+    .btn-update { background: var(--success); }
+    .btn-detail { background: var(--warning); }
+
+    @@media(max-width:768px) {
+        .movie-table thead {
+            display: none;
+        }
+    }
+</style>
+
+<div class="admin-card">
+    <div class="admin-header">
+        <div class="admin-title">
+            🎬 Film Listesi
         </div>
+
+        <div class="admin-search">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" placeholder="Film ara..." />
+        </div>
+
+        <a href="#" class="btn-primary-soft">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            Yeni Film
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="movie-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Film Adı</th>
+                    <th>Rating</th>
+                    <th>Yıl</th>
+                    <th>Durum</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                    <th>Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><div class="movie-id">@item.MovieId</div></td>
+                        <td><strong>@item.Title</strong></td>
+                        <td>
+                            <span class="rating-pill">
+                                ⭐ @item.Rating
+                            </span>
+                        </td>
+                        <td>@item.CreatedYear</td>
+                        <td>
+                            <span class="status-pill @(item.Status ? "active" : "passive")">
+                                @(item.Status ? "AKTİF" : "PASİF")
+                            </span>
+                        </td>
+                        <td><a href="#" class="action-btn btn-delete">Sil</a></td>
+                        <td><a href="#" class="action-btn btn-update">Güncelle</a></td>
+                        <td><a href="#" class="action-btn btn-detail">Detay</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
