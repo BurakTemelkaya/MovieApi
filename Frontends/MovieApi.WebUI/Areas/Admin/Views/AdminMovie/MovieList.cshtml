@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "MovieList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
 @model List<AdminResultMovieDto>
@@ -32,8 +33,9 @@
                     <tbody>
                         @foreach (var movie in Model)
                         {
+                            count++;
                             <tr>
-                                <td>@movie.MovieId</td>
+                                <td>@count</td>
                                 <td>@movie.Title</td>
                                 <td>@movie.Rating</td>
                                 <td>@movie.CreatedYear</td>

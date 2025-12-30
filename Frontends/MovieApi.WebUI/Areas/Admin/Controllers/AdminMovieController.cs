@@ -28,4 +28,22 @@ public class AdminMovieController : Controller
 
         return View();
     }
+
+    [HttpGet]
+    public IActionResult CreateMovie()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateMovie(AdminCreateMovieDto createMovieDto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Movies", createMovieDto);
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            return View(createMovieDto);
+        }
+        return RedirectToAction(nameof(MovieList), new { area = "Admin" });
+    }
 }
