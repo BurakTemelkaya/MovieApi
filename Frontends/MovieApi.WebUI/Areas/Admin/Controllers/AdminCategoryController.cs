@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieApi.Dto.Dtos.AdminMovieDtos;
+using MovieApi.Dto.Dtos.AdminCategoryDtos;
 
 namespace MovieApi.WebUI.Areas.Admin.Controllers;
 
+[Area("Admin")]
 public class AdminCategoryController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
@@ -20,11 +21,33 @@ public class AdminCategoryController : Controller
 
         if (responseMessage.IsSuccessStatusCode)
         {
-            List<AdminResultMovieDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultMovieDto>>();
+            List<AdminResultCategoryDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultCategoryDto>>();
 
             return View(values);
         }
 
         return View();
     }
+
+    [HttpGet]
+    public IActionResult CreateCategory()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateCategory(AdminCreateCategoryDto createCategoryDto)
+    {
+        var client = _httpClientFactory.CreateClient();
+
+        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Categories", createCategoryDto);
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            return View(createCategoryDto);
+        }
+
+        return RedirectToAction(nameof(CategoryList));
+    }
+
 }
