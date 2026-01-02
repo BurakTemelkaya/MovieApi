@@ -7,10 +7,12 @@ public class Category
     public bool Status { get; set; }
     public string? Description { get; set; }
     public ICollection<Movie> Movies { get; set; }
+    public ICollection<Series> Serieses { get; set; }
 
     public Category()
     {
         CategoryName = string.Empty;
         Movies = new HashSet<Movie>();
+        Serieses = new HashSet<Series>();
     }
 }

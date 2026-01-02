@@ -18,4 +18,5 @@ public class MovieContext : IdentityDbContext<AppUser>
     public virtual DbSet<Review> Reviews { get; set; }
     public virtual DbSet<Tag> Tags { get; set; }
     public virtual DbSet<Cast> Casts { get; set; }
+    public virtual DbSet<Series> Serieses { get; set; }
 }
