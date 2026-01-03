@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "SeriesList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+@model List<AdminResultSeriesDto>
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0">Dizi Listesi</h5>
+            <form class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><ion-icon name="search-sharp"></ion-icon></div>
+                <input class="form-control ps-5" type="text" placeholder="Dizi Ara...">
+            </form>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>#</th>
+                        <th>Film Adı</th>
+                        <th>Rating</th>
+                        <th>Çıkış Yılı</th>
+                        <th>Durum</th>
+                        <th>Sil</th>
+                        <th>Güncelle</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var series in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@series.Title</td>
+                            <td>@series.Rating</td>
+                            <td>@series.CreatedYear</td>
+                            <td>@series.Status</td>
+                            <td><a href="#" class="btn btn-danger">Sil</a></td>
+                            <td><a href="#" class="btn btn-success">Güncelle</a></td>
+                            <td><a href="#" class="btn btn-warning">Detaylar</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a href="/Admin/AdminSeries/CreateSeries" class="btn btn-primary">Yeni Dizi Girişi</a>
+        </div>
+    </div>
+</div>
+
+

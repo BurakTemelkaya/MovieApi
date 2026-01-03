@@ -13,15 +13,15 @@ public class AdminMovieController : Controller
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<IActionResult> MovieList()
+    public async Task<IActionResult> MovieList(CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
 
-        var responseMessage = await client.GetAsync("https://localhost:7031/api/Movies");
+        var responseMessage = await client.GetAsync("https://localhost:7031/api/Movies", cancellationToken);
 
         if (responseMessage.IsSuccessStatusCode)
         {
-            List<AdminResultMovieDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultMovieDto>>();
+            List<AdminResultMovieDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultMovieDto>>(cancellationToken);
 
             return View(values);
         }
@@ -36,10 +36,10 @@ public class AdminMovieController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateMovie(AdminCreateMovieDto createMovieDto)
+    public async Task<IActionResult> CreateMovie(AdminCreateMovieDto createMovieDto, CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Movies", createMovieDto);
+        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Movies", createMovieDto, cancellationToken);
         if (!responseMessage.IsSuccessStatusCode)
         {
             return View(createMovieDto);
