@@ -1,4 +1,6 @@
-﻿namespace MovieApi.Dto.Dtos.AdminMovieDtos;
+﻿using MovieApi.Dto.Dtos.AdminCategoryDtos;
+
+namespace MovieApi.Dto.Dtos.AdminMovieDtos;
 
 public class AdminResultMovieDto
 {
@@ -11,4 +13,5 @@ public class AdminResultMovieDto
     public DateTime ReleaseDate { get; set; }
     public string CreatedYear { get; set; }
     public bool Status { get; set; }
+    public AdminResultCategoryDto Category { get; set; }
 }

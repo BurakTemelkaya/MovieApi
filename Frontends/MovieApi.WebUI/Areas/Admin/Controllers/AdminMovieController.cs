@@ -17,7 +17,7 @@ public class AdminMovieController : Controller
     {
         var client = _httpClientFactory.CreateClient();
 
-        var responseMessage = await client.GetAsync("https://localhost:7031/api/Movies", cancellationToken);
+        var responseMessage = await client.GetAsync("https://localhost:7031/api/Movies/GetMoviesWithCategory", cancellationToken);
 
         if (responseMessage.IsSuccessStatusCode)
         {

@@ -24,6 +24,7 @@ public class CreateMovieCommandHandler
             Rating = command.Rating,
             ReleaseDate = command.ReleaseDate,
             Status = command.Status,
+            CategoryId = command.CategoryId
         };
 
         await _context.Movies.AddAsync(newMovie, cancellationToken);

@@ -1,7 +1,10 @@
-﻿namespace MovieApi.Application.Features.CQRSDesingPatterns.Commands.MovieCommands;
+﻿using MovieApi.Application.Features.CQRSDesingPatterns.Result.CategoryResults;
 
-public class CreateMovieCommand
+namespace MovieApi.Application.Features.CQRSDesingPatterns.Result.MovieResults;
+
+public class GetMovieWithCategoryQueryResult
 {
+    public int MovieId { get; set; }
     public string Title { get; set; }
     public string CoverImageUrl { get; set; }
     public decimal Rating { get; set; }
@@ -10,5 +13,5 @@ public class CreateMovieCommand
     public DateTime ReleaseDate { get; set; }
     public string CreatedYear { get; set; }
     public bool Status { get; set; }
-    public int CategoryId { get; set; }
+    public GetCategoryByIdResult Category { get; set; }
 }

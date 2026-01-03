@@ -28,6 +28,7 @@ public class UpdateMovieCommandHandler
         movie.Description = command.Description;
         movie.ReleaseDate = command.ReleaseDate;
         movie.Duration = command.Duration;
+        movie.CategoryId = command.CategoryId;
 
         await _context.SaveChangesAsync(cancellationToken);
     }
