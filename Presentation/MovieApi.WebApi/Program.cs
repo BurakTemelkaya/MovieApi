@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
-using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.CategoryHandlers;
-using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.MovieHandlers;
-using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.UserRegisterHandlers;
+using MovieApi.Application;
 using MovieApi.Application.Features.MediatorDesignPatterns.Handlers.TagHandlers;
 using MovieApi.Persistence.Context;
 using MovieApi.Persistence.Identity;
@@ -15,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(x=>
+builder.Services.AddSwaggerGen(x =>
 {
     x.SwaggerDoc("v1", new OpenApiInfo
     {
@@ -26,19 +23,8 @@ builder.Services.AddSwaggerGen(x=>
 
 builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
 
-builder.Services.AddScoped<GetCategoryQueryHandler>();
-builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
-builder.Services.AddScoped<CreateCategoryCommandHandler>();
-builder.Services.AddScoped<UpdateCategoryCommandHandler>();
-builder.Services.AddScoped<RemoveCategoryCommandHandler>();
+builder.Services.AddApplicationServices();
 
-builder.Services.AddScoped<GetMovieQueryHandler>();
-builder.Services.AddScoped<GetMovieByIdQueryHandler>();
-builder.Services.AddScoped<CreateMovieCommandHandler>();
-builder.Services.AddScoped<UpdateMovieCommandHandler>();
-builder.Services.AddScoped<RemoveMovieCommandHandler>();
-
-builder.Services.AddScoped<CreateUserRegisterCommandHandler>();
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<MovieContext>();
 
@@ -54,6 +40,16 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movie API V1");
     });
 }
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return;
+    }
+    await next();
+});
 
 
 app.UseHttpsRedirection();

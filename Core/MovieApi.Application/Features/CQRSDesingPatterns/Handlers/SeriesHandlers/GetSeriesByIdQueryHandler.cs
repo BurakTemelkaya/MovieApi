@@ -5,11 +5,11 @@ using MovieApi.Persistence.Context;
 
 namespace MovieApi.Application.Features.CQRSDesingPatterns.Handlers.SeriesHandlers;
 
-public class GetSeriesByIdCommandQueryHandler
+public class GetSeriesByIdQueryHandler
 {
     private readonly MovieContext _context;
 
-    public GetSeriesByIdCommandQueryHandler(MovieContext context)
+    public GetSeriesByIdQueryHandler(MovieContext context)
     {
         _context = context;
     }

@@ -13,7 +13,7 @@ public class UpdateSeriesCommandHandler
         _context = context;
     }
 
-    public async Task Handler(UpdateSeriesCommand updateSeriesCommand, CancellationToken cancellationToken)
+    public async Task Handle(UpdateSeriesCommand updateSeriesCommand, CancellationToken cancellationToken)
     {
         Series? series = await _context.Serieses.FindAsync(updateSeriesCommand.SeriesId, cancellationToken);
 
