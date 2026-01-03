@@ -1,34 +1,19 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using MovieApi.Application;
-using MovieApi.Application.Features.MediatorDesignPatterns.Handlers.TagHandlers;
-using MovieApi.Persistence.Context;
-using MovieApi.Persistence.Identity;
+using MovieApi.Application.Extensions;
+using MovieApi.WebApi.Extensions;
+using MovieApi.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(x =>
-{
-    x.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Movie API",
-        Version = "v1"
-    });
-});
 
-builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
 
-builder.Services.AddApplicationServices();
-
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<MovieContext>();
-
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTagQueryHandler).Assembly));
+builder.Services
+    .AddApplicationServices()
+    .AddIdentityServices()
+    .AddMediatorServices()
+    .AddSwaggerServices()
+    .AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 

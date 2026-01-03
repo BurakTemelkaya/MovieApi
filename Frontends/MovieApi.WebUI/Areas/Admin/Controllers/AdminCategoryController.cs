@@ -13,15 +13,15 @@ public class AdminCategoryController : Controller
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<IActionResult> CategoryList()
+    public async Task<IActionResult> CategoryList(CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
 
-        var responseMessage = await client.GetAsync("https://localhost:7031/api/Categories");
+        var responseMessage = await client.GetAsync("https://localhost:7031/api/Categories", cancellationToken);
 
         if (responseMessage.IsSuccessStatusCode)
         {
-            List<AdminResultCategoryDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultCategoryDto>>();
+            List<AdminResultCategoryDto>? values = await responseMessage.Content.ReadFromJsonAsync<List<AdminResultCategoryDto>>(cancellationToken);
 
             return View(values);
         }
@@ -36,11 +36,11 @@ public class AdminCategoryController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCategory(AdminCreateCategoryDto createCategoryDto)
+    public async Task<IActionResult> CreateCategory(AdminCreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
 
-        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Categories", createCategoryDto);
+        var responseMessage = await client.PostAsJsonAsync("https://localhost:7031/api/Categories", createCategoryDto, cancellationToken);
 
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -50,10 +50,10 @@ public class AdminCategoryController : Controller
         return RedirectToAction(nameof(CategoryList), new { area = "Admin" });
     }
 
-    public async Task<IActionResult> DeleteCategory(int id)
+    public async Task<IActionResult> DeleteCategory(int id, CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.DeleteAsync($"https://localhost:7031/api/Categories?categoryId={id}");
+        var responseMessage = await client.DeleteAsync($"https://localhost:7031/api/Categories?categoryId={id}", cancellationToken);
 
         if (!responseMessage.IsSuccessStatusCode)
         {

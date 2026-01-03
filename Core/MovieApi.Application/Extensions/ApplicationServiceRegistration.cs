@@ -4,7 +4,7 @@ using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.MovieHandlers;
 using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.SeriesHandlers;
 using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.UserRegisterHandlers;
 
-namespace MovieApi.Application;
+namespace MovieApi.Application.Extensions;
 
 public static class ApplicationServiceRegistration
 {
