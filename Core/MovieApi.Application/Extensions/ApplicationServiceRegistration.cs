@@ -24,6 +24,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<GetMovieWithCategoryQueryHandler>();
 
         services.AddScoped<GetSeriesQueryHandler>();
+        services.AddScoped<GetSeriesWithCategoryQueryHandler>();
         services.AddScoped<GetSeriesByIdQueryHandler>();
         services.AddScoped<CreateSeriesCommandHandler>();
         services.AddScoped<RemoveSeriesCommandHandler>();
