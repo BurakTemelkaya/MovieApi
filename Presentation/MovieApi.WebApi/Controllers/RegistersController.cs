@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieApi.Application.Features.CQRSDesingPatterns.Commands.UserRegisterCommands;
 using MovieApi.Application.Features.CQRSDesingPatterns.Handlers.UserRegisterHandlers;
 
@@ -21,5 +20,16 @@ public class RegistersController : ControllerBase
     {
         await _createUserRegisterCommandHandler.Handle(command);
         return Ok("Kullanıcı başarıyla eklendi.");
+    }
+
+    [HttpPost("bulk")]
+    public async Task<IActionResult> CreateUserRegisterBuld(List<CreateUserRegisterCommand> commands)
+    {
+        foreach (var command in commands)
+        {
+            await _createUserRegisterCommandHandler.Handle(command);
+        }
+
+        return Ok($"{commands.Count} Kullanıcı başarıyla eklendi.");
     }
 }
