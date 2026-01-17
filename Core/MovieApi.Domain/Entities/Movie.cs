@@ -12,6 +12,17 @@ public class Movie
     public string CreatedYear { get; set; }
     public bool Status { get; set; }
     public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public virtual Category Category { get; set; }
+    public virtual ICollection<Review> Reviews { get; set; }
+
+    public Movie()
+    {
+        Title = string.Empty;
+        CoverImageUrl = string.Empty;
+        Description = string.Empty;
+        CreatedYear = string.Empty;
+        Category = new();
+        Reviews = new HashSet<Review>();
+    }
 
 }
